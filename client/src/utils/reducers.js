@@ -66,7 +66,7 @@ export const reducer = (state = initialState, action) => {
     // ⇒　return a set of products in "cart" with diferent product id and action id
     // under a condition: 
     // number of elememts in cart must be greater than 0
-    // then set "cart" value = "newState"
+    // then, set "cart" value = "newState"
     case REMOVE_FROM_CART:
       let newState = state.cart.filter((product) => {
         return product._id !== action._id;
