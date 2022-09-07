@@ -30,6 +30,7 @@ const initialState = {
   currentCategory: '1',
 };
 
+// series of action
 test('UPDATE_PRODUCTS', () => {
   let newState = reducer(initialState, {
     type: UPDATE_PRODUCTS,

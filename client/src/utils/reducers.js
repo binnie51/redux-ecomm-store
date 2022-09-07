@@ -11,11 +11,19 @@ import {
   TOGGLE_CART,
 } from './actions';
 
-// TODO: To get a better understand of how a reducer works - add comments to the various actions in the reducer
-export const reducer = (state, action) => {
+const initialState = {
+  products: [],
+  cart: [],
+  cartOpen: false,
+  categories: [],
+  currentCategory: '',
+}
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // TODO: Add a comment describing the functionality of the UPDATE_PRODUCTS case
-    // Your comment here
+    
+    // if action type is UPDATE_PRODUCTS, 
+    // ⇒　return a new state object with updated array of "products" 
     case UPDATE_PRODUCTS:
       return {
         ...state,
@@ -34,8 +42,12 @@ export const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, ...action.products],
       };
-    // TODO: Add a comment describing the functionality of the UPDATE_CART_QUANTITY case
-    // Your comment here
+
+    // if action type is UPDATE_CART_QUANTITY, 
+    // ⇒　return a new state object if "cartOpen" boolean statement is true,
+    // map a new array that will be populated by res 
+    // if the action id matches the product id, they're essentially equal
+    // ⇒ return updated product inside of "cart" 
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
@@ -48,8 +60,13 @@ export const reducer = (state, action) => {
         }),
       };
 
-    // TODO: Add a comment describing the functionality of the REMOVE_FROM_CART case
-    // Your comment here
+
+    // if action type is REMOVE_FROM_CART, 
+    // set a new state of "cart" by filter() the array 
+    // ⇒　return a set of products in "cart" with diferent product id and action id
+    // under a condition: 
+    // number of elememts in cart must be greater than 0
+    // then set "cart" value = "newState"
     case REMOVE_FROM_CART:
       let newState = state.cart.filter((product) => {
         return product._id !== action._id;
@@ -86,8 +103,9 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory,
       };
 
-    // TODO: Add a comment describing what the default case is for
-    // Your comment here
+    
+    // if none of these actions are performed, 
+    // DON'T update the state at all and keep things the same
     default:
       return state;
   }
